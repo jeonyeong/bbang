@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>NextIT</title>
+<link rel="icon" type="image/x-icon" href="./images/nextit_log.jpg"/>
+<link rel="stylesheet" type="text/css" href="./css/forgotpw.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+ 
+function check(){
+// alert("check");
+
+    if($("#mem_id").val() ==""){
+        $("#mem_id").next().addClass("warning");
+        setTimeout(function(){
+            $("#mem_id").next().removeClass("warning");
+        },1500);
+    }else if($("#mem_like_num").val() =="" ){
+        $("#mem_like_num").next().addClass("warning");
+        setTimeout(function(){
+            $("#mem_like_num").next().removeClass("warning");
+        },1500);
+    }           
+    let mem_id = $("#mem_id").val();
+    let mem_like_num = $("#mem_like_num").val();
+    console.log("mem_id:::"+mem_id);
+
+
+    let member = localStorage.getItem("member");
+    if(member == null){
+        console.log("회원 목록을 불러오지 못하였습니다.");
+    }else{
+        
+        let member_list = JSON.parse(member);
+        console.log("member_list.lenght::::::"+member_list.length);
+        
+        for(let i =0 ; i < member_list.length; i++){
+            //console.log("mem_id::::::::::"+member_list[i].mem_id)
+            if(mem_id == member_list[i].mem_id){
+                console.log("아이디가 존재 합니다.");
+                if(mem_like_num == member_list[i].mem_like_num){
+                    console.log("아이디와 넘버가 일치합니다");
+                    
+                    //id를 배열에 pw로 넣어서 패스워드 초기화 진행하기
+                    member_list[i].mem_pw = mem_id ;
+                    console.log("member_list[i].mem_pw::::::"+member_list[i].mem_pw);
+                    
+                    let mem_array_json = JSON.stringify(member_list);
+                    console.log("mem_array_json::::::"+mem_array_json);
+
+                    if (!window.localStorage) {
+                        alert("로컬스토리지를 지원하지 않습니다.");
+                        return;
+                    }
+                    //json으로 저장 
+                    localStorage.setItem("member", mem_array_json);
+                    alert("Password has been initialized with your ID.")
+                    location.href ="http://127.0.0.1:5500/html_homepage01_media/login.html";
+                    
+                }else{
+                    alert("아이디 또는 넘버가 올바르지 않습니다.")
+                    return ;
+                }
+            }
+        }
+        
+
+
+}
+
+
+let member_info = {};   
+member_info.mem_id = mem_id;
+member_info.mem_like_num = mem_like_num;
+
+let mem_array = [];
+mem_array.push(member_info);
+console.log("mem_array1:::::::"+mem_array);
+
+
+//배열을 json으로 변경
+//localStorage.setItem("member_info", JSON.stringify(mem_array));
+//key  => member   value => ["{\"mem_id\":\"123\",\"mem_name\":\"asdf\",\"mem_pw\":\"123123\",\"mem_pw_check\":\"123123\"}","{\"mem_id\":\"234\",\"mem_name\":\"sdfg\",\"mem_pw\":\"234234\",\"mem_pw_check\":\"234234\"}"]
+
+};
+// 아이디, 넘버 값으로 확인 하고 맞다면  패스워드는 아이디로 초기화 해주기
+    // 값을 들고와서 like_num값이 일치 하는지 확인
+    // 일치하다면 해당 순번을 지우고 새로 넣어주기 넣어줄때 패스워드를 아이디로 넣어주기 
+// 로그인했는데 ID와 PW 가 갖다면 패스워드 수정하기 => 학생들에게 과제로 내주기
+</script>
+</head>
+<body>
+    <section class="login_form">
+        <h1>NextIT</h1> 
+        <form action="">
+            <div class="int-area">
+                <input type="text" id="mem_id" name="mem_id" value="" autocomplete="off" required>
+                <label for=mem_id>USER ID</label>
+            </div>
+            <div class="int-area">
+                <input type="text" id="mem_like_num" name="mem_like_num" value="" autocomplete="off" required>
+                <label for=mem_like_num>NUMBER( the number when joining ) </label>
+            </div>
+            <div class="btn-area">
+                <button type="button"  id="btn_id"name="btn_id" onclick="check()">CHECK</button>
+            </div>
+        </form>    
+    </section>
+</body>
+</html>
