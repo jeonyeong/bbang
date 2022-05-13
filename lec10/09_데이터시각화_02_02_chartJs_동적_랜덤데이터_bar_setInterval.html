@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+ 
+$(function(){
+    
+    chartJs();
+
+    setInterval(function(){
+      chartJs();
+    },2000);
+    
+});
+
+function createNum(){
+    //생성할 개수 
+    let cnt= 6;
+    //최대수 지정
+    let max= 99;
+    let result =[];
+    for(let i=0; i< cnt; i++){
+        result.push(Math.floor(Math.random()*max)+1);
+    }
+    console.log("result", result);
+    return result;
+}
+
+function chartJs(){
+  $(".canvas_div").remove();
+  let str = "<div class='canvas_div'><canvas id='myChart'></canvas></div>"
+  $("#chart").html(str);
+  
+  let result= createNum();
+
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+  ];
+
+  const data01 = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: result,
+    }]
+  };
+  //설정
+  const config = {
+    type: 'bar',
+    data: data01,
+    options: {}
+  };
+
+  //그리기
+  var myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+ 
+}
+ 
+</script>
+<style>
+    .canvas_div{
+        width: 1000px;
+        height: 700px;
+    }    
+    </style>
+</head>
+<body>
+<!-- chart.js -->
+  <div id="chart">
+      <!-- chart -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!-- 
+  09_데이터시각화_04_01_01_jQuery_animate_정적_고정데이터.html + 동적 + 랜덤 데이터 
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Bar Chart</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script> -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  /* background: #333; */
+}
+
+.chart{
+  width: 550px;
+  height: 600px;
+  display: block;
+}
+
+.numbers{
+  color: #17C0EB;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 100%;
+  float: left;
+  /* display: inline-block; */
+}
+ 
+.numbers li{
+  list-style: none;
+  height: calc(600px / 3);
+  position: relative;
+  
+}
+
+.numbers span{
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+.numbers > li:nth-child(2) > span{
+  color: orange;
+  top: calc( 200px / 2 - 10px );
+}
+.numbers > li:nth-child(1) > span{
+  color: red;
+  top: 0px;
+}
+
+
+.bars{
+  color: black;
+  font-size: 12px;
+  font-weight: 600;
+  background: #8e9598;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 500px;
+  height: 600px;
+  box-shadow: 0 0 10px 0 #555;
+  border-radius: 5px;
+}
+
+.bars li{
+  display: table-cell;
+  width: 100px;
+  height: 600px;
+  position: relative;
+}
+
+.bars span{
+  width: 100%;
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+}
+
+.bars .bar{
+  display: block;
+  background: #17C0EB;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+/*
+.bars .bar:hover{
+  background: #55EFC4;
+  box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+  cursor: pointer;
+}
+
+.bars .bar:before{
+  color: #fff;
+   content: attr(data-percentage) '%'; 
+  position: relative;
+  bottom: 20px;
+}*/
+      
+</style>  
+</head>
+  <body>
+
+    <!--chart start-->
+    <div class="chart">
+      <ul class="numbers">
+        <li><span>100%</span></li>
+        <li><span>50%</span></li>
+        <li><span>0%</span></li>
+      </ul>
+      <ul class="bars">
+        <li><div class="bar" ></div><span>Server 01</span></li>
+        <li><div class="bar" ></div><span>Server 02</span></li>
+        <li><div class="bar" ></div><span>Server 03</span></li>
+        <li><div class="bar" ></div><span>Server 04</span></li>
+        <li><div class="bar" ></div><span>Server 05</span></li>
+      </ul>
+    </div>
+    <!--chart end-->
+
+    <script type="text/javascript">
+
+    //초기 랜덤 데이터 생성  
+    let server1 = Math.floor(Math.random()*600);
+    let server2 = Math.floor(Math.random()*600);
+    let server3 = Math.floor(Math.random()*600);
+    let server4 = Math.floor(Math.random()*600);
+    let server5 = Math.floor(Math.random()*600);
+
+    //랜덤하게 변경되는 값 생성
+    function clientNum(){
+      let changeNum01 = Math.floor(Math.random()*50)
+      let changeNum02 = Math.floor(Math.random()*50)
+      let changeNum03 = Math.floor(Math.random()*50)
+      let changeNum04 = Math.floor(Math.random()*50)
+      let changeNum05 = Math.floor(Math.random()*50)
+      let randomNum01 = Math.floor(Math.random()*9)+1
+      let randomNum02 = Math.floor(Math.random()*9)+1
+      let randomNum03 = Math.floor(Math.random()*9)+1
+      let randomNum04 = Math.floor(Math.random()*9)+1
+      let randomNum05 = Math.floor(Math.random()*9)+1
+
+      if(randomNum01< 5){
+        changeNum01 *= -1;
+      }
+      if(randomNum02< 5){
+        changeNum02 *= -1;
+      }
+      if(randomNum03< 5){
+        changeNum03 *= -1;
+      }
+      if(randomNum04< 5){
+        changeNum04 *= -1;
+      }
+      if(randomNum05< 5){
+        changeNum05 *= -1;
+      }
+
+
+      server1 += changeNum01;
+      server2 += changeNum02;
+      server3 += changeNum03;
+      server4 += changeNum04;
+      server5 += changeNum05;
+      
+      //최소값 세팅
+      if(server1 <20){
+        server1 = 20;
+      }
+      if(server2 <20){
+        server2 = 20;
+      }
+      if(server3 <20){
+        server3 = 20;
+      }
+      if(server4 <20){
+        server4 = 20;
+      }
+      if(server5 <20){
+        server5 = 20;
+      }
+
+      //최대값 세팅
+      if(server1 > 600){
+        server1 = 600;
+      }
+      if(server2 > 600){
+        server2 = 600;
+      }
+      if(server3 > 600){
+        server3 = 500;
+      }
+      if(server4 > 600){
+        server4 = 600;
+      }
+      if(server5 > 600){
+        server5 = 600;
+      }
+    }
+
+    function checkServer(){
+      if(server1 > 500){
+        $(".bars li:nth-child(1) .bar").css("background-color", "red");
+      }else if(server1 > 300){
+        $(".bars li:nth-child(1) .bar").css("background-color", "orange");
+      }else{
+        $(".bars li:nth-child(1) .bar").css("background-color", "#17C0EB");
+      }
+      if(server2 > 500){
+        $(".bars li:nth-child(2) .bar").css("background-color", "red");
+      }else if(server2 > 300){
+        $(".bars li:nth-child(2) .bar").css("background-color", "orange");
+      }else{
+        $(".bars li:nth-child(2) .bar").css("background-color", "#17C0EB");
+      }	
+      
+      if(server3 > 500){
+        $(".bars li:nth-child(3) .bar").css("background-color", "red");
+      }else if(server3 > 300){
+        $(".bars li:nth-child(3) .bar").css("background-color", "orange");
+      }else{
+        $(".bars li:nth-child(3) .bar").css("background-color", "#17C0EB");
+      }
+
+      if(server4 > 500){
+        $(".bars li:nth-child(4) .bar").css("background-color", "red");
+      }else if(server4 > 300){
+        $(".bars li:nth-child(4) .bar").css("background-color", "orange");
+      }else{
+        $(".bars li:nth-child(4) .bar").css("background-color", "#17C0EB");
+      }
+
+      if(server5 > 500){
+        $(".bars li:nth-child(5) .bar").css("background-color", "red");
+      }else if(server5 > 300){
+        $(".bars li:nth-child(5) .bar").css("background-color", "orange");
+      }else{
+        $(".bars li:nth-child(5) .bar").css("background-color", "#17C0EB");
+      }
+
+      $(".bars li:nth-child(1) .bar").stop().animate({height:server1},500);
+      $(".bars li:nth-child(2) .bar").stop().animate({height:server2},500);
+      $(".bars li:nth-child(3) .bar").stop().animate({height:server3},500);
+      $(".bars li:nth-child(4) .bar").stop().animate({height:server4},500);
+      $(".bars li:nth-child(5) .bar").stop().animate({height:server5},500);
+
+
+    }  
+
+
+    /*$(function(){
+      //$('.bars li .bar').each(function(key, bar){
+      $('.bars li .bar').each(function(index){
+        var percentage = $(this).data('percentage');
+        $(this).animate({
+          // 'height' : percentage + '%'
+          
+        },1000);
+      });
+    });*/
+
+    
+     let timer =  setInterval(function(){
+     // let timer =  setTimeout(function(){
+        clientNum();
+        checkServer();
+      }, 1000 );
+
+    </script>
+
+  </body>
+</html>
+      

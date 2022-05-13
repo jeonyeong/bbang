@@ -1,0 +1,220 @@
+<!--
+	 09_데이터시각화_04_01_01_jQuery_animate_정적_고정데이터.html + 동적 + 랜덤 데이터
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+*{
+    margin: 0 auto;
+	list-style: none;
+	
+} 
+#wrap{
+	width: 600px;
+	height: 400px;
+	background-color: antiquewhite;
+	text-align: center;
+	margin-top: 100px;
+	position: relative;
+	top: 100px;
+	border-radius: 20px;
+}
+.div_chart{
+	position: relative;
+	top: 50px;
+	
+}
+.stop {
+    padding: 0 0 0 10px;
+	background-color: #8e9598;
+	width: 500px;
+	height: 300px;
+	border-radius: 10px;
+}
+.stop > li{
+	width: 500px;
+	height: calc( 300px / 3);
+	
+	
+}
+.li_div{
+    width:0px;
+    height:50px;
+    background:#1D87CF;
+    margin-bottom:10px;
+	display: block;
+	margin: 0;
+	position: relative;
+	top: calc(100px / 2 - 25px );
+}
+/* .stop li > div{
+    background:orange;
+} */
+
+.stop > li {
+	position: relative;
+}
+.stop > li > span{
+	color: black;
+	position: absolute;
+	top: 35px;
+	left: 5px;
+}
+.div_range{
+	width: 510px;
+	height: 20px;
+	/* background-color: aquamarine; */
+}
+.ul_range{
+	padding: 0;
+	display: flex;
+	height: 20px;
+	/* background-color: blueviolet; */
+}
+.ul_range > li{
+	position: relative;
+}
+.ul_range > li:nth-child(1) > span{
+	position: absolute;
+	left: -70px;
+}
+.ul_range > li:nth-child(3) > span{
+	position: absolute;
+	right: -77px;
+}
+
+</style>
+<script>
+	//일정이상 되면 색변경하기 
+	let server1 = Math.floor(Math.random()*500);
+	let server2 = Math.floor(Math.random()*500);
+	let server3 = Math.floor(Math.random()*500);
+	
+	function clientNum(){
+		let changeNum01 = Math.floor(Math.random()*50)
+		let changeNum02 = Math.floor(Math.random()*50)
+		let changeNum03 = Math.floor(Math.random()*50)
+		let randomNum01 = Math.floor(Math.random()*9)+1
+		let randomNum02 = Math.floor(Math.random()*9)+1
+		let randomNum03 = Math.floor(Math.random()*9)+1
+		console.log("randomNum01:", randomNum01, "randomNum02 : ", randomNum02 , "randomNum03 : ", randomNum03);
+		if(randomNum01< 5){
+			changeNum01 *= -1;
+		}
+		if(randomNum02< 5){
+			changeNum02 *= -1;
+		}
+		if(randomNum03< 5){
+			changeNum03 *= -1;
+		}
+
+		server1 += changeNum01;
+		server2 += changeNum02;
+		server3 += changeNum03;
+
+		if(server1 <20){
+			server1 = 20;
+		}
+		if(server2 <20){
+			server2 = 20;
+		}
+		if(server3 <20){
+			server3 = 20;
+		}
+		if(server1 > 500){
+			server1 = 500;
+		}
+		if(server2 > 500){
+			server2 = 500;
+		}
+		if(server3 > 500){
+			server3 = 500;
+		}
+	}
+
+
+	function checkServer(){
+
+		if(server1 > 400){
+			$(".stop > li:nth-child(1) > div").css("background", "linear-gradient( to right, #fc9388 1%, #bf1f05)");
+		}else if(server1 > 300){
+			$(".stop > li:nth-child(1) > div").css("background", "linear-gradient( to right, #fc9388 5%, #bf1f05)");
+		}else if(server1 > 200){
+			$(".stop > li:nth-child(1) > div").css("background", "linear-gradient( to right, #fc9388 20%, #bf1f05)");
+		}else if(server1 > 100){
+			$(".stop > li:nth-child(1) > div").css("background", "linear-gradient( to right, #fc9388 30%, #bf1f05)");
+		}else{
+			$(".stop > li:nth-child(1) > div").css("background", "linear-gradient( to right, #fc9388 40%, #bf1f05)");
+		}
+
+		if(server2 > 400){
+			$(".stop > li:nth-child(2) > div").css("background", "linear-gradient( to right, #fc9388 1%, #bf1f05)");
+		}else if(server2 > 300){
+			$(".stop > li:nth-child(2) > div").css("background", "linear-gradient( to right, #fc9388 5%, #bf1f05)");
+		}else if(server2 > 200){
+			$(".stop > li:nth-child(2) > div").css("background", "linear-gradient( to right, #fc9388 20%, #bf1f05)");
+		}else if(server2 > 100){
+			$(".stop > li:nth-child(2) > div").css("background", "linear-gradient( to right, #fc9388 30%, #bf1f05)");
+		}else{
+			$(".stop > li:nth-child(2) > div").css("background", "linear-gradient( to right, #fc9388 40%, #bf1f05)");
+		}
+
+		if(server3 > 400){
+			$(".stop > li:nth-child(3) > div").css("background", "linear-gradient( to right, #fc9388 1%, #bf1f05)");
+		}else if(server3 > 300){
+			$(".stop > li:nth-child(3) > div").css("background", "linear-gradient( to right, #fc9388 5%, #bf1f05)");
+		}else if(server3 > 200){
+			$(".stop > li:nth-child(3) > div").css("background", "linear-gradient( to right, #fc9388 20%, #bf1f05)");
+		}else if(server3 > 100){
+			$(".stop > li:nth-child(3) > div").css("background", "linear-gradient( to right, #fc9388 30%, #bf1f05)");
+		}else{
+			$(".stop > li:nth-child(3 ) > div").css("background", "linear-gradient( to right, #fc9388 40%, #bf1f05)");
+		}
+
+		
+		$(".stop > li:nth-child(1) > div").stop().animate({width:server1},500);
+		$(".stop > li:nth-child(2) > div").stop().animate({width:server2},500);
+		$(".stop > li:nth-child(3) > div").stop().animate({width:server3},500);
+	}
+	let timer =  setInterval(function(){
+	//	let timer =  setTimeout(function(){
+		//alert("timer");
+		clientNum();
+		checkServer();
+	}, 1000 );
+
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div class="div_chart">  
+		<ul class="stop">
+			<li>
+				<div class="li_div"></div>
+				<span>server1</span>
+			</li>
+			<li>
+				<div class="li_div"></div>
+				<span>server2</span>
+			</li>
+			<li>
+				<div class="li_div"></div>
+				<span>server3</span>
+			</li>
+		</ul>
+		<div class="div_range">
+			<ul class="ul_range">
+				<li><span>0%</span></li>
+				<li><span>50%</span></li>
+				<li><span>100%</span></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+

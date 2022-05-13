@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- 
+    type: 'line', 
+-->
+
+<style>
+.canvas_div{
+    width: 1000px;
+    height: 700px;
+}    
+
+</style>
+<script> 
+</script>
+</head>
+<body>
+<div class="canvas_div">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+
+const labels =["1","2","3","4","5","6","7"];
+const data = {
+  labels: labels,
+  datasets: [
+        {
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: "origin",
+                /*
+                Fill 옵션은 총 네 가지가 존재합니다 
+                    - false  : 아무것도 채워지지 않음
+                    - origin : 기준점 사이로 채워짐 
+                    - start : x축 선부터 채워짐
+                    - end : x축의 최대값의 기준으로 채워짐
+                */
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        },
+        {
+            label: 'My First Dataset',
+            data: [15, 29, 30, 41, 56, 65, 70],
+            fill: false,
+            borderColor: 'rgb(152, 192, 123)',
+            tension: 0.1
+        }
+    ]
+};
+
+
+var myChart = new Chart(document.getElementById('myChart'), {
+    type: 'line',
+    data: data,
+    options: {
+        // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+        maintainAspectRatio: false, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+   
+});
+</script>
+</body>
+</html>

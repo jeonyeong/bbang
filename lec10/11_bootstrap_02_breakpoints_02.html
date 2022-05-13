@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Page Title</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 576px에서 밑으로 내려감 -->
+    <div class="row">
+        <div class="col-sm-4" style="background-color: red;">col-sm-4</div>
+        <div class="col-sm-4" style="background-color: cadetblue">col-sm-4</div>
+        <div class="col-sm-4" style="background-color: cornsilk">col-sm-4</div>
+        <hr>
+        <div class="col-sm-4" style="background-color: darkgreen">col-sm-4</div>
+        <div class="col-sm-4" style="background-color: deepskyblue">col-sm-4</div>
+        <div class="col-sm-4" style="background-color: gold">col-sm-4</div>
+        <div class="col-sm-4" style="background-color: magenta">col-sm-4</div>    
+    </div>
+    <br><br><br>
+    
+    <!-- 768px에서 밑으로 내려감 -->
+    <div class="row">
+        <!-- 첫줄 -->
+        <div class="col-md-4" style="background-color: red;">col-md-4</div>
+        <div class="col-md-4" style="background-color: cadetblue">col-md-4</div>
+        <div class="col-md-4" style="background-color: cornsilk">col-md-4</div>
+        <hr>
+        <!-- 두번째줄 -->
+        <div class="col-md-4" style="background-color: darkgreen">col-md-4</div>
+        <div class="col-md-4" style="background-color: deepskyblue">col-md-4</div>
+        <div class="col-md-4" style="background-color: gold">col-md-4</div>
+        
+        <!-- 세번째줄 -->
+        <div class="col-md-4" style="background-color: magenta">col-md-4</div>    
+    </div>
+    <br><br><br>
+
+    <!-- 768px에서 이하로 줄이면 col-sm-3으로 인하여 한줄에 배치 그리고나서 더줄이면(576px 이하) 모두 밑으로 내려감  -->
+    <div class="row">
+        <div class="col-sm-3 col-md-4" style="background-color: red;">col-sm-3, col-md-4</div>
+        <div class="col-sm-3 col-md-4" style="background-color: cadetblue">col-sm-3, col-md-4</div>
+        <div class="col-sm-3 col-md-4" style="background-color: midnightblue">col-sm-3, col-md-4</div>
+        <div class="col-sm-3 " style="background-color: saddlebrown">col-sm-3</div>
+    </div>
+    <br><br><br>
+
+    <div class="row">
+        <div class="col-3" style="background-color: skyblue;">col-xs-3</div>
+        <div class="col-3" style="background-color: springgreen;">col-xs-3</div>
+        <div class="col-3" style="background-color: steelblue;">col-xs-3</div>
+    </div>
+
+</body>
+</html>

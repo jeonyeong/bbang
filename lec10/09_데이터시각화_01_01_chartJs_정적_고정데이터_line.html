@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 
+chartjs
+  https://www.chartjs.org
+
+사용법 (Get Started)
+  https://www.chartjs.org/docs/ -> Get Started -> Getting Started
+
+예제 (samples)
+  https://www.chartjs.org/  -> samples
+-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.canvas_div{
+    width: 1000px;
+    height: 700px;
+}    
+</style>
+</head>
+<body>
+<div class="canvas_div">
+    <canvas id="myChart"></canvas>
+</div>
+<script>
+//라벨
+const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+];
+
+//데이터
+let values =  [0, 10, 5, 2, 20, 30, 45];
+
+const data01 = {
+  labels: labels,
+  datasets: [{
+    label: 'My First dataset',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: values,
+  }]
+};
+
+//설정
+const config = {
+  type: 'line',
+  data: data01,
+  options: {}
+};
+
+//그리기
+// === include 'setup' then 'config' above ===
+var myChart = new Chart(
+  document.getElementById('myChart'),
+  config
+);
+</script>
+</body>
+</html>

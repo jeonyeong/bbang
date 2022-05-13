@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ag-grid</title>
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css"/>
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css"/>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script> 
+<style>
+/* headerName 중앙위치 */
+.ag-header-cell-label {
+   justify-content: center;
+}
+
+</style>
+<script> 
+
+
+// ag-grid ( https://www.ag-grid.com/ )
+// 참고 ( https://eblo.tistory.com/29 )
+
+
+// specify the data
+let jsonData =
+{
+	"count" : 4,
+	"data" : [ 
+	{
+			"menu_code" : "10002",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT1",
+			"set_name" : "머신러닝",
+			"price" : 1000
+		}, 
+		{
+			"menu_code" : "10003",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT2",
+			"set_name" : "머신러닝",
+			"price" : 2000
+		}, 
+		{
+			"menu_code" : "10004",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT3",
+			"set_name" : "머신러닝",
+			"price" : 3000
+		}, 
+		{
+			"menu_code" : "10005",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT4",
+			"set_name" : "머신러닝",
+			"price" : 4000
+		}, 
+		{
+			"menu_code" : "10006",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT5",
+			"set_name" : "머신러닝",
+			"price" : 5000
+		}, 
+		{
+			"menu_code" : "10007",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT6",
+			"set_name" : "머신러닝",
+			"price" : 6000
+		}, 
+		{
+			"menu_code" : "10008",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT7",
+			"set_name" : "머신러닝",
+			"price" : 7000
+		}, 
+		{
+			"menu_code" : "10009",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT8",
+			"set_name" : "머신러닝",
+			"price" : 8000
+		}, 
+		{
+			"menu_code" : "10010",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT9",
+			"set_name" : "머신러닝",
+			"price" : 9000
+		}, 
+		{
+			"menu_code" : "10011",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT10",
+			"set_name" : "머신러닝",
+			"price" : 10000
+		},
+		{
+			"menu_code" : "10012",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT11",
+			"set_name" : "머신러닝",
+			"price" : 11000
+		}, 
+		{
+			"menu_code" : "10013",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT12",
+			"set_name" : "머신러닝",
+			"price" : 12000
+		}, {
+			 
+			"menu_code" : "10014",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT13",
+			"set_name" : "머신러닝",
+			"price" : 13000
+		}, {
+			 
+			"menu_code" : "10015",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT14",
+			"set_name" : "머신러닝",
+			"price" : 14000
+		}, 
+		{
+			"menu_code" : "10016",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT15",
+			"set_name" : "머신러닝",
+			"price" : 15000
+		}, 
+		{
+			"menu_code" : "10017",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT16",
+			"set_name" : "머신러닝",
+			"price" : 16000
+		}, 
+		{
+			"menu_code" : "10018",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT17",
+			"set_name" : "머신러닝",
+			"price" : 17000
+		}, 
+		{
+			"menu_code" : "10019",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT18",
+			"set_name" : "머신러닝",
+			"price" : 18000
+		}, 
+		{
+			"menu_code" : "10020",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT19",
+			"set_name" : "머신러닝",
+			"price" : 19000
+		}, 
+		{
+			"menu_code" : "10021",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT20",
+			"set_name" : "머신러닝",
+			"price" : 20000
+		}, 
+		{
+			"menu_code" : "10022",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT21",
+			"set_name" : "머신러닝",
+			"price" : 21000
+		}, 
+		{
+			"menu_code" : "10023",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT22",
+			"set_name" : "머신러닝",
+			"price" : 22000
+		},
+		{
+			"menu_code" : "10024",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT23",
+			"set_name" : "머신러닝",
+			"price" : 23000
+		}, 
+		{
+			"menu_code" : "10025",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT24",
+			"set_name" : "머신러닝",
+			"price" : 24000
+		}, 
+		{
+			"menu_code" : "10026",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT25",
+			"set_name" : "머신러닝",
+			"price" : 25000
+		}, 
+		{
+			"menu_code" : "10027",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT26",
+			"set_name" : "머신러닝",
+			"price" : 26000
+		}, 
+		{
+			"menu_code" : "10027",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT27",
+			"set_name" : "머신러닝",
+			"price" : 27000
+		}, 
+		{
+			"menu_code" : "10029",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT28",
+			"set_name" : "머신러닝",
+			"price" : 28000
+		}, 
+		{
+			"menu_code" : "10030",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT29",
+			"set_name" : "머신러닝",
+			"price" : 29000
+		}, 
+		{
+			"menu_code" : "10031",
+			"catagory" : "주메뉴",
+			"output_name" : "NextIT30",
+			"set_name" : "머신러닝",
+			"price" : 30000
+		}, 
+		{
+			"menu_code" : "10032",
+			"catagory" : "사이드",
+			"output_name" : "NextIT31",
+			"set_name" : "머신러닝",
+			"price" : 31000
+		}, 
+		{
+			"menu_code" : "10033",
+			"catagory" : "기타",
+			"output_name" : "NextIT32",
+			"set_name" : "머신러닝",
+			"price" : 32000
+		}, 
+		{
+			"menu_code" : "10034",
+			"catagory" : "기타",
+			"output_name" : "NextIT33",
+			"set_name" : "머신러닝",
+			"price" : 33000
+		}
+	]
+		 
+};
+console.log(jsonData);
+console.log(JSON.stringify(jsonData));
+ 
+
+let gridOptions;
+$(function(){  
+// specify the columns
+let columnDefs = [	
+	{width: "50px", cellStyle:{"textAlign":"center"}, headerCheckboxSelection: true, checkboxSelection: true}, 
+	// headerName은 보여질이름 || filed는 json객체의이름 || cellStyle는 값이 보여질 형식? 양식? || onCellClicked는 셀이 클릭되었을때 이벤트
+	{headerName : "메뉴코드",	field:"menu_code", 		width: "150px",  cellStyle:{"textAlign":"center"}, onCellClicked:fn_viewPage}, 
+	{headerName : "분류",     	field:"catagory" , 		width: "150px", cellStyle:{"textAlign":"center"}},
+	{headerName : "출력명",   	field:"output_name", 	width: "260px", cellStyle:{"textAlign":"center"}},
+	{headerName : "세트명",   	field:"set_name", 		width: "260px", cellStyle:{"textAlign":"center"}},
+	{headerName : "판매단가", 	field:"price", 			width: "260px", cellStyle:{"textAlign":"center"}}
+];
+    
+ 
+
+let rowDataSet =  jsonData;
+let rowData = rowDataSet.data; 
+    
+    // let the grid know which columns and what data to use
+	gridOptions = {
+      columnDefs: columnDefs, //컬럼 정의
+      rowData: rowData, // 표시할 데이터 
+      rowSelection: 'multiple', //여러행 선택
+      //enableColResize: true,
+      //enableSorting: true,  //정렬
+      //enableFilter: true,  //검색
+      //enableRangeSelection: true,
+      //suppressRowClickSelection: true,
+      //animateRows: true,
+      //editable:true,
+	  pagination:true,	//페이징사용 유무
+	  paginationPageSize:10,  //페이징개수
+      onRowClicked : function(event){
+          console.log('onRowClicked');
+          console.log(event);
+          console.log(event.rowIndex);
+      },
+    };
+
+  // lookup the container we want the Grid to use
+  let eGridDiv = document.querySelector('#myGrid');
+  // create the grid passing in the div to use together with the columns & data we want to use
+  new agGrid.Grid(eGridDiv, gridOptions);
+   
+  //api를 사용하여 따로 설정도 가능
+  //gridOptions.api.setRowData(rowData);
+
+});
+
+function fn_viewPage (e){
+	let ret = confirm("수정하시겠습니까?");
+	if(ret == true){
+		console.log(e.event );
+		alert("수정하려는 메뉴코드 ::::"+e.event.target.textContent)
+	}else{
+		
+	}
+	
+	
+}
+
+//삭제 
+function fn_delete(){
+	let selectedRows = gridOptions.api.getSelectedRows();
+	console.log("selectedRows:::"+selectedRows.length);
+
+	let maxToShow = 5;
+
+	if(selectedRows.length > maxToShow ){
+		alert("최대 5개까지 가능합니다.");
+		return false;
+	}
+	for(let i=0; i< selectedRows.length; i++){
+		console.log("삭제하려는 메뉴코드::::::"+selectedRows[i].menu_code);
+	}
+}
+ 
+</script>
+</head>
+
+<body style="margin:0 auto; padding-top:100px;">
+<div id="agGrid_div">
+	<input type="button" onclick="fn_delete()" value="삭제"/>
+	<div id="myGrid" style="width:1100px;height: 400px;" class="ag-theme-balham"></div>
+</div>
+</body>
+</html>

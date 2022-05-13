@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// chart.js를 사용하여 새로고침 하면  데이터가 랜덤하게 출력되게 함
+
+//alert("123");
+
+//생성한 수를 담을 배열
+let result =[];
+
+$(function(){
+    //alert("jquery")
+    
+    //생성할 개수 
+    let cnt= 6;
+    //최대수 지정
+    let max= 99;
+
+    for(let i=0; i< cnt; i++){
+        result.push(Math.floor(Math.random()*max)+1);
+    }
+    console.log("result", result);
+    
+    chartJs();
+    
+});
+
+function chartJs(){
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+  ];
+
+  let values =  [0, 10, 5, 2, 20, 30, 45];
+
+  const data01 = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: result,
+    }]
+  };
+  //설정
+  const config = {
+    type: 'line',
+    data: data01,
+    options: {}
+  };
+
+  //그리기
+  var myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+}
+</script>
+<style>
+    .canvas_div{
+        width: 1000px;
+        height: 700px;
+    }    
+    </style>
+</head>
+<body>
+<!-- chart.js -->
+    <div class="canvas_div">
+        <canvas id="myChart"></canvas>
+    </div>
+</body>
+</html>

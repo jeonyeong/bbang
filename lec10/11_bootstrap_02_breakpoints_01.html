@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Page Title</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+<!-- 
+https://getbootstrap.com/docs/5.1/layout/breakpoints/#available-breakpoints
+
+컬럼 배치
+    부트스트랩에서는 기본적으로 12컬럼으로 정의하며 12컬럼이 넘어가면 새로운 줄에 컬럼이 배치 된다. 
+        ( 하나의 row에 col 합이 12 이어야 한 행에 배치 됨)
+
+컬럼 클래스 종류
+    xs (부트3에서는 col-xs-* 인데 부트4 부터는 col-*으로 변경)
+        유지
+    small 
+        576px 에서 세로 배치 
+    Medium 
+        768px 에서 세로 배치 
+    Large
+        992px 에서 세로 배치 
+    Extra Large
+        1200px 에서 세로 배치
+-->
+</head>
+<body>
+    <br><br>
+    <div class="row">
+        <p>test_col-xs-4</p>
+        <div class="col-4" style="background-color: red;">A</div> 
+        <div class="col-4" style="background-color: yellow;">B</div>
+        <div class="col-4" style="background-color:blue;">C</div>   
+    </div>
+
+    <br><br>
+    <div class="row">
+        <br/>    
+        <p>test_col-sm-4</p>  
+        <div class="col-sm-4" style="background-color: red;">A</div> 
+        <div class="col-sm-4" style="background-color: yellow;">B</div>
+        <div class="col-sm-4" style="background-color:blue;">C</div>   
+    </div>
+
+    <br><br>
+    <div class="row">
+        <br/>    
+        <p>test_col-md-4</p>
+        <div class="col-md-4" style="background-color: red;">A</div> 
+        <div class="col-md-4" style="background-color: yellow;">B</div>
+        <div class="col-md-4" style="background-color:blue;">C</div>   
+        <br/>    
+    </div>
+    
+    <br><br>
+    <div class="row">
+        <p>test_col-lg-4</p>
+        <div class="col-lg-4" style="background-color: red;">A</div> 
+        <div class="col-lg-4" style="background-color: yellow;">B</div>
+        <div class="col-lg-4" style="background-color:blue;">C</div>
+    </div>
+    
+    <br><br>
+    <div class="row">
+        <p>test_col-xl-4</p>
+        <div class="col-xl-4" style="background-color: red;">A</div> 
+        <div class="col-xl-4" style="background-color: yellow;">B</div>
+        <div class="col-xl-4" style="background-color:blue;">C</div>
+    </div>  
+
+</body>
+</html>
