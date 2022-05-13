@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.login_form{
+	text-align: center;
+	 position: relative;
+    top: 50%;
+}
+body{
+	height: 100vh;
+    background: url("../images/leaves-g5eeaca109_1920.jpg") no-repeat center;
+    background-size: cover;
+}
+
+.int-area2 {
+	padding-left: 215px;
+	margin-top:10px;
+	}
+.btn-area{
+	margin-top:10px;
+}

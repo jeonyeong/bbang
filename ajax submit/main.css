@@ -1,0 +1,532 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 0;
+    color: black;
+}
+
+
+.intro_text  {
+position: relative;
+}
+.intro_text span{
+    position: absolute;
+    top :-20px;
+    right: 60px;
+    /* width: 50px; */
+    /* height: 50px; */
+}
+.intro_text span img{
+    width: 100px;
+    height: 110px;
+}
+
+.intro_bg{
+    width: 100%;
+    height: 720px;
+    
+    /* background-color: black; */
+}
+.header{
+    width: 1280px;
+    height: 86px;
+    background-color: red;
+    display: flex;
+    position: relative;
+    top: 50px;
+}
+.nav{
+    display: flex;
+}
+.nav > li{
+    margin-left: 84px;
+    margin-top: 30px;
+}
+
+.nav > li > a{
+    
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.btn-area{
+    margin-top: 30px;
+    margin-right: 60px;
+}
+
+.nav a:hover {
+    color:darkorange;
+} 
+
+.nav li ul{
+    display: none;
+    opacity: 0; 
+    margin-left: 10px;
+}
+.nav>li{
+    position: relative;
+    right: 70px;
+}
+.nav li:hover ul{
+    animation: fade-in .5s;
+    animation-fill-mode: forwards;
+    display: block;
+}
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+.intro_text{
+    width: 20%;
+    background-color: violet;
+   position: relative;
+   left: 70px;
+   
+}
+.header, .nav, .intro_text{
+    background: transparent;
+}
+
+.test{
+    display: flex;
+    width: 1100px;
+    height: 400px;
+    margin-top: 100px;
+   
+}   
+
+.test >.test7{
+   
+    width:400px;
+    height: 400px;
+ 
+}
+.test>.test5{
+   
+    width: 600px;
+    height: 400px;
+   background-image: url("../images/mango.jpg");
+   border-radius: 10px;
+   
+  
+}
+
+.test >.test7> .test1{
+    width: 200px;
+    height: 200px;
+    background-image: url("../images/winter.png");
+    position: static;
+    float:left;
+    border-radius: 10px 0px 0px 0px;
+}
+
+
+.test >.test7> .test1:hover{
+    background-size: 110% 110%;
+    transition: all 1s;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: static;
+    float:left;
+    border-radius: 10px 0px 0px 0px;
+}
+
+
+.test >.test7>.test2{
+width: 200px;
+height: 200px;
+background-image: url("../images/ji.png");
+float: left;
+border-radius: 0px 10px 0px 0px;
+
+}
+.test >.test7>.test2:hover{
+    background-size: 110% 110%;
+    transition: all 1s;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float: left;
+    border-radius: 0px 10px 0px 0px;
+    
+    }
+
+.test>.test7>.test3{
+    width: 200px;
+    height: 200px;
+    background-image: url("../images/iu.png");
+    float:left;
+    border-radius: 0px 0px 0px 10px;
+}
+.test>.test7>.test3:hover{
+   background-size: 110% 110%;
+   transition: all 1s;
+   background-repeat: no-repeat;
+   background-position: center center;
+    background-image: url("../images/iu.png");
+    float:left;
+    border-radius: 0px 0px 0px 10px;
+}
+
+.test>.test7>.test4{
+    width: 200px;
+    height: 200px;
+    background-image: url("../images/ka2.png");
+    float: left;
+    border-radius: 0px 0px 10px 0px;
+}
+
+.test>.test7>.test4:hover{
+    background-size: 110% 110%;
+    transition: all 1s;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float: left;
+    border-radius: 0px 0px 10px 0px;
+}
+
+.main_text1{
+    width: 100%;
+    height: 700px;
+    background-color: lightblue;
+}
+
+.main_text1 > h1 {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+}
+
+
+
+.service{
+    display: flex;
+   
+    width: 1070px;
+    height: 440px;
+    margin-top: 20px;
+}
+.aomg{
+    margin-top: 30px;
+}
+.service > div > img {
+    width: 640px;
+    height: 440px;
+}
+
+.service > div:last-child{
+   
+    padding-top:20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: justify;
+}
+
+
+.main_text1{
+    background-color: #fff;
+}
+
+/* footer*/
+
+/* .div_footer{
+    width: 100%;
+    height: 150px;
+    
+    display: flex;
+    position: relative;
+    bottom: 100px;
+    left:120px
+}
+.div_footer > div {
+    padding-top:30px;
+}
+.div_footer > div:first-child{
+    flex: 4;
+    
+}
+.div_footer > div:last-child{
+    flex: 6;
+    
+}
+.div_footer > div:first-child{
+    text-align: center;
+    font-weight: bold;
+} */
+.menu {
+    display: none;
+}
+@media (max-width:1220px){  
+.intro_text span{
+    display: none;
+}
+    #wrap {width: 95%;} 
+
+    .header{
+        width: 100%;
+    }       
+
+    /* nav 간격조절 */
+    .nav > li{
+        margin-left: 30px;
+    }
+    /* 전체크기잡기 */
+    .sub_title{
+        width: 95%;
+        background-color: lightgreen;
+    }
+    /* dliv가 잡은 영역 안에 들어오게 크기조절 */
+    .sub_title > li > div {
+        width: 250px;
+    }
+
+    .sub_title{
+        background-color: #fff;
+    }
+
+    /* icons 전체 크기 잡기 */
+    .main_text0 > ul{
+        width: 95%;
+        background-color: chartreuse;
+    }
+
+    /* li 크기 줄이기 */
+    .icons > li {
+        width: 340px;
+    }
+
+    .main_text0 > ul{
+        background-color: white;
+    }
+
+    /* service 전체 크기 잡기 */
+    .service{
+        width: 95%;
+    }
+
+
+
+}
+
+@media (max-width:930px){
+    .service{
+    display: block;
+    width: 100%;
+    height: 880px;
+    background-color: lightgreen;
+}
+.intro_text span{
+    display: none;
+}
+.menu{
+    display: block;
+}
+/*service img 크기 */
+.service > div:first-child > img{
+    width: 100%;
+}  
+
+/* service 텍스트부분 영역 */
+.contents3{
+    height: 440px;
+}
+
+/* 바탕색변경 */
+.main_text1, .service{
+    background-color: white;
+}
+
+.test{
+    display: block;
+    width:100%;
+    height: 880px;
+    
+}
+.div_footer {
+    height: 200px !important;
+}
+
+#menuicon, .header_icon{
+    display: none;
+}
+.nav{
+    display: none;
+}
+.header_icon{
+    display: block;
+}
+.header_icon{
+    width: 300px;
+    height: 100%;
+    background-color:black;
+    position: fixed;
+    top: 0;
+    z-index:1 ;
+    /* 여기까지 확인하고 
+     right -300px으로 밀어넣기 */
+    right:-300px;
+    opacity: 0.5;
+                                          
+}
+input[id="menuicon"] + label{
+    /* 라벨은 인라인 요소라서 영역(width)을 가질수
+        없다 따라서 displaly:block으로 변경 */
+    display: block;
+    width: 30px;
+    height: 20px;
+    
+    position: fixed;
+    right: 30px;
+    top: 25px;
+    cursor: pointer;
+} 
+input[id="menuicon"] + label > span{
+    /* span태그도 인라인 이라서 영역을 가질수 없다
+     따라서 width, height 값을 가지기 위해서
+     display:block로 변경 */
+    display: block;
+    /* 가로바 생성 */
+    width: 100%;
+    /* 가로바 두께 */
+    height: 4px;
+    background:black;
+}
+   /* span 3줄 위치 설정*/
+   input[id="menuicon"] + label span:nth-child(1){
+    position: absolute;
+    top: 0;
+}
+input[id="menuicon"] + label span:nth-child(2){
+    position: absolute;
+                                                                   top: 50%;
+    top: calc( 50% - 2px);
+}
+input[id="menuicon"] + label span:nth-child(3){
+    position: absolute;
+    bottom: 0;
+} 
+
+input[id="menuicon"]:checked + label span:nth-child(1){
+    top:50%;
+    transform: rotate(45deg);
+}
+
+input[id="menuicon"]:checked + label span:nth-child(2){
+    /* X 를 만들기 위해서 가운데는 안보이게 처리 */
+        opacity: 0;
+}
+
+input[id="menuicon"]:checked + label span:nth-child(3){
+        top: 50%;
+        transform: rotate(-45deg);
+}
+input[id="menuicon"]:checked + label + div{
+    right: 0;
+}
+
+/* 우측 네비바 때문에 X표가 안보이므로 z-index로 올리기 */
+input[id="menuicon"] + label{
+z-index: 2;
+
+
+}
+
+/*span 태그 모서리 둥글게하고 애니메이션 주기  */
+input[id="menuicon"] + label span{
+border-radius: 30px;
+transition: all .35s;
+}
+ /* 슬라이드 메뉴 영역 */
+ .menu {
+    width: 250px;
+    height: 500px;
+    background-color:lightsalmon;
+    margin: 100px auto;
+}
+
+/* 슬라이드메뉴 li 위치조정 */
+.menu > li {
+    padding-top:20px;
+    padding-left: 40px;
+}
+
+.menu > li > a{
+    /* visibility:visible; */
+    color: #fff;
+}
+.menu {
+    background-color: transparent;
+}
+
+}
+.section input[id*="slide"]{
+	display:none;
+}
+.section .slidewrap{
+	max-width:640px;
+	margin:0;
+	overflow:hidden;
+}
+.section .slidelist{
+	white-space:nowrap;
+	font-size:0;
+}
+.section .slidelist > li{
+	display:inline-block;
+	vertical-align:middle;
+	width:100%;
+	transition:all .5s;
+}
+.section .slidelist > li > a {
+	display:block;
+	position:relative;
+}
+.section .slidelist > li > a img{
+	width:100%;
+}
+.section .slidelist label{
+	position:absolute;
+	z-index:10;
+	top:50%;
+	transform:translateY(-50%);
+	padding:50px;
+	cursor:pointer;
+}
+.section .slidelist .left{
+	width:50px;
+	height:50px;
+	padding:0;
+	left:30px;
+	background:url("../images/left-arrow.png")  center center / 100% no-repeat;
+
+}
+.section .slidelist .right{
+	width:50px;
+	height:50px;
+	padding:0;
+	right:30px;
+	background:url("../images/right-arrow.png") center center /100% no-repeat;
+    
+}
+label.left {filter: opacity(0.1) drop-shadow(0 0 0 black)}
+label.right {filter: opacity(0.1) drop-shadow(0 0 0 black)}
+.section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
+.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
+.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
+
+
+.section{
+	margin-top:30px;
+	margin-right:10px;
+}
+
+a.del {
+    position: relative;
+    top: 30px;
+    right:140px;
+}

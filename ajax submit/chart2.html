@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" type="text/css"  href="./css/header.css">
+<link rel="stylesheet" type="text/css"  href="./css/chart2.css">
+
+<style>
+    body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+   background: white; 
+}
+
+.chart{
+  width: 600px;
+  height: 300px;
+  display: block;
+  position:absolute;
+   right:400px;
+}
+
+.numbers{
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 100%;
+  display: inline-block;
+  /* float: left; */
+}
+
+.numbers li{
+  list-style: none;
+  height: 150px;
+  position: relative;
+  bottom: 145px;
+}
+
+.numbers span{
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+.bars{
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgb(165, 197, 233);
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 500px;
+  height: 300px;
+  box-shadow: 0 0 10px 0 #555;
+  border-radius: 5px;
+}
+
+.bars li{
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  position: relative;
+}
+
+.bars span{
+  width: 100%;
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+}
+
+.bars .bar{
+  display: block;
+  background: white;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+.bars .bar:hover{
+  background: #55EFC4;
+  box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+  cursor: pointer;
+}
+
+.bars .bar:before{
+  color: black;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
+}
+h1{
+text-align:center;
+margin-bottom:50px;
+}      
+.header{
+position:absolute;
+left:300px
+}
+</style>  
+
+
+<script>
+
+
+$(function(){
+	   $(".top_nav").load("/Submit/header.do");
+	  
+})
+
+
+ window.onload = function addMusicList() {
+        $.ajax({
+            type: 'GET',
+            url: 'https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=bd104c114d96943442c79340a0106cdb&format=json',
+            success: function (response) {
+//                 alert("ajax success")	//연결을 확인한다
+                let musicList = response["artists"]["artist"];
+                
+                for (let i = 0; i < musicList.length; i++) {
+                    //     let albumImg = musicList[i]["image"][0]["#text"]
+                         let albumTitle = musicList[i]["name"]
+                         let playcount = musicList[i]["playcount"]
+                         console.log(albumTitle, playcount)
+                         
+                         
+                         
+                    
+                    }
+                
+                console.log("musicList.length:::" ,musicList.length);
+                console.log("musicList[1]::: ",musicList[1]);
+                console.log("musicList[1].name:::",musicList[1].name);
+                
+                let index=1;
+                let insertHTML="";
+                
+               for (let i = 1; i < 11; i++) {
+                    insertHTML += "<tr>";
+                    insertHTML += "<td>" + i +"</td>";
+                    insertHTML += "<td>" + musicList[i].name +"</td>";
+                    insertHTML += "<td>" + musicList[i].playcount +"</td>";
+                    insertHTML += "</tr>";
+                }
+                $("#div_table tbody").html(insertHTML);
+            }
+        })
+    }
+    
+    
+
+    
+
+    
+</script>
+
+<script type="text/javascript">
+$(function(){
+  //$('.bars li .bar').each(function(key, bar){
+  $('.bars li .bar').each(function(){
+    var percentage = $(this).data('percentage');
+    $(this).animate({
+      'height' : percentage + '%'
+    },1000);
+  });
+});
+  </script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div class="wrap">
+
+<div class="chart">
+<h1>선호도 퍼센티지</h1>
+      <ul class="numbers">
+        <li><span>100%</span></li>
+        <li><span>50%</span></li>
+        <li><span>0%</span></li>
+      </ul>
+      <ul class="bars">
+        <li><div class="bar" data-percentage="50"></div><span>Ariana Grande</span></li>
+        <li><div class="bar" data-percentage="30"></div><span>Kanye West</span></li>
+        <li><div class="bar" data-percentage="60"></div><span>Harry Styles</span></li>
+        <li><div class="bar" data-percentage="100"></div><span>Taylor Swift</span></li>
+        <li><div class="bar" data-percentage="80"></div><span>Doja Cat</span></li>
+      </ul>
+    </div>
+
+
+
+
+
+<div class= "search">
+<div id="div_table">
+<table>
+<colgroup>
+<col width="100">
+<col width="?">
+</colgroup>
+<thead>
+<tr>
+<th>No</th>
+<th>가수</th>
+<th>재생횟수</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+
+</table>
+<div class="header">
+<div class="top_nav">
+        <!-- header 영역 -->    
+        
+   
+        
+              </div>
+         </div> 
+        </div>
+    <div class="contents">
+
+
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+    
+</body>
+
+
+
+
+
+</html>

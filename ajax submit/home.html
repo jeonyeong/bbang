@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mango</title>
+<link rel="icon" type="image/x-icon" href="./images/mango_log">
+<link rel="stylesheet" type="text/css" href="./css/footer.css">
+<link rel="stylesheet" type="text/css" href="./css/main.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style type="text/css">
+#modal_div1 {
+	width: 100%;
+	height: 100%;
+	position: fixed; /*스크롤처리*/
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+	display: none;
+}
+
+#modal_div2 {
+	width: 400px;
+	height: 400px;
+	background-color: lightgrey;
+	text-align: center;
+	position: fixed;
+	left: calc(50% - 200px);
+	top: calc(50% - 200px);
+}
+
+#modal_div2>p {
+	margin-top: 50px;
+}
+
+#modal_div2>a {
+	margin-left: 300px;
+}
+
+/*6차-8 form css 추가 작업 (6차-9)*/
+form[name="loginForm"] {
+	width: 350px;
+	height: 350px;
+	/* background-color: tomato; */
+	margin-top: 20px;
+}
+
+.int-area {
+	width: 300px;
+	height: 150px;
+	/* background-color: lightblue; */
+}
+
+.int-area:first-child {
+	padding-top: 40px;
+}
+
+.int-area input {
+	width: 80%;
+	padding: 20px 10px 10px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #999;
+	font-size: 18px;
+	color: #fff;
+}
+
+.btn-area>button {
+	position: relative;
+	top: -50px
+}
+/* 버튼클릭액션 */
+#btn_id:active {
+	color: gray;
+}
+</style>
+
+<script>
+	window.onload = function() {
+		// footer불러오기
+		$("#page_footer").load("./footer.do");
+
+		// alert("123");
+
+		let img_files = [ "./images/chart.png", "./images/mango.jpg",
+
+		];
+		let div_img = document.getElementById("test6");
+		let i = 0;
+		function fn_change_img() {
+			//alert("123123123");
+			console.log("i::::" + i);
+			div_img.style.backgroundImage = "url(" + img_files[i] + ")";
+			if (i == 1) {
+				i = 0;
+			} else {
+				i++
+			}
+			div_img.style.transitionDuration = "2s";
+
+		}
+
+		setInterval(function() {
+			fn_change_img();
+
+		}, 4000);
+
+		let mem_id = sessionStorage.getItem("mem_id");
+		console.log("mem_id::" + mem_id);
+
+		let memberList = localStorage.getItem("memberList");
+		console.log("memberList::::" + memberList);
+
+		let mem_arr = JSON.parse(memberList);
+		console.log(mem_arr.length);
+
+		for (let i = 0; i < mem_arr.length; i++) {
+			if (mem_arr[i].mem_id == mem_id && mem_arr[i].mem_pw == mem_id) {
+				//alert("비밀번호를 변경하셔야 합니다.");
+				//$("#modal_div1").show();	
+				$("#modal_div1").fadeIn();
+			}
+		}
+
+	}
+
+	function fn_change() {
+		let mem_pw = $("#mem_pw").val().trim();
+		if (mem_pw.length < 4) {
+			alert("PASSWORD가 너무 짧습니다. 4글자 이상 입력해 주세요");
+			$("#mem_pw").val("");
+			return;
+		}
+		let mem_pw_check = $("#mem_pw_check").val();
+		if (mem_pw != mem_pw_check) {
+			$("#mem_pw_check").val("");
+			alert("입력하신 비밀번호와 재확인 비밀번호가 틀립니다.");
+			return;
+		}
+		let mem_id = sessionStorage.getItem("mem_id");
+		console.log("mem_id::" + mem_id);
+
+		let memberList = localStorage.getItem("memberList");
+		console.log("memberList::::" + memberList);
+
+		let mem_arr = JSON.parse(memberList);
+		console.log(mem_arr.length);
+		//specialyw03
+		for (let i = 0; i < mem_arr.length; i++) {
+			console.log(mem_arr[i].mem_id + " , " + mem_id + " , "
+					+ mem_arr[i].mem_pw + " , " + mem_pw);
+			if (mem_arr[i].mem_id == mem_id) {
+				if (mem_arr[i].mem_pw != mem_pw) {
+					mem_arr[i].mem_pw = mem_pw;
+				} else {
+					alert("기존 비밀번호와 같습니다. 다시입력해주세요");
+					document.loginForm.reset();
+					return false;
+
+					/* 참고사항 
+						사실 비밀번호는 일방향 해시 암호화 되어야 합니다.
+						비밀번호는 화면단에 전송하지 않아야 합니다.
+						검증은 서버단에서 되어야 합니다.
+					 */
+				}
+			}
+		}
+		memberList = JSON.stringify(mem_arr);
+		localStorage.setItem("memberList", memberList);
+		alert("비밀번호 변경이 완료 되었습니다.");
+		//$("#modal_div1").hide();
+		$("#modal_div1").fadeOut();
+
+	}
+
+	function logout() {
+		//alert("fn_logout");
+		let ret = confirm("로그아웃 하시겠습니까?");
+		if (ret) {
+			sessionStorage.removeItem("mem_id");
+			alert("로그아웃  하였습니다. 로그인 페이지로 이동합니다.");
+			location.href = "/Submit/login.do";
+		} else {
+			alert("로그아웃을 취소하셨습니다.");
+		}
+	}
+
+	function fn_del() {
+		let mem = confirm("삭제하시겠습니까?");
+		if (mem == true) {
+			let memberList = localStorage.getItem("memberList");
+			let memberList_json = JSON.parse(memberList);
+			for ( let i in memberList_json) {
+				let mem_id = sessionStorage.getItem("mem_id");
+				if (mem_id == memberList_json[i].mem_id) {
+					memberList_json.splice(i, 1);
+					
+					memberList = JSON.stringify(memberList_json);
+					localStorage.setItem("memberList", memberList);
+					alert("삭제 완료");
+					location.href = "./login.do";
+					
+					
+				} 
+			}
+			
+		} else {
+			alert("취소");
+		}
+	}
+</script>
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+	<div id="wrap">
+		<div id="img_div" class="intro_bg">
+			<div class="header">
+				<!-- hearder s-->
+				<div class="intro_text">
+					<div class="mango">
+						<h1>Mango</h1>
+						<H4>music news</H4>
+
+					</div>
+					<span><img src="./images/mango3.png" alt=""></span>
+
+				</div>
+
+
+
+				<ul class="nav">
+					<li><a href="./home.do">HOME</a></li>
+					<li><a href="./chart2.do">CHART</a></li>
+					<li><a href="#service">SERVICE</a>
+						<ul>
+							<li><a href="./search.do">search</a></li>
+
+						</ul></li>
+					<li><a href="./board_write.do">NOTICE</a></li>
+					<li><a href="./map.do">MAP</a></li>
+					<!-- 리스트 만들면 연결 -->
+					<!-- <li><a href="./board_list.html">NOTICE</a></li> -->
+					<div class="btn-area">
+						<button type="button" id="btn_id" name="btn_id" onclick="logout()">LOGOUT</button>
+					</div>
+					<div class="caption">
+						<ul class="caption_ul">
+							<li><a class="del" href="#" onclick="fn_del()">delete my
+									account</a></li>
+						</ul>
+					</div>
+
+				</ul>
+			</div>
+
+			<div class="test">
+				<div class="test7">
+					<div class="test1"></div>
+					<div class="test2"></div>
+					<div class="test3"></div>
+					<div class="test4"></div>
+
+				</div>
+				<div id="test6" class="test5"></div>
+			</div>
+
+
+			<label for="menuicon"> <span></span> <span></span> <span></span>
+			</label>
+
+			<div class="header_icon">
+				<ul class="menu">
+					<li><a href="./home.html">HOME</a></li>
+					<li><a href="#test6">CHART</a></li>
+					<li><a href="#service">SERVICE</a></li>
+					<li><a href="./board_write.html">NOTICE</a></li>
+					<li><a href="./map.html">MAP</a></li>
+				</ul>
+			</div>
+
+
+
+
+			<div class="main_text1">
+				<h1 id="service">SERVICE</h1>
+				<div class="contents2">
+					<p></p>
+				</div>
+
+				<div class="service">
+
+					<div class="section">
+						<input type="radio" name="slide" id="slide01" checked> <input
+							type="radio" name="slide" id="slide02"> <input
+							type="radio" name="slide" id="slide03">
+
+						<div class="slidewrap">
+							<ul class="slidelist">
+								<li><a> <label for="slide03" class="left"></label> <img
+										src="./images/magazine.png" alt="이미지가 존재하지 않습니다."> <label
+										for="slide02" class=right></label>
+								</a></li>
+								<li><a> <label for="slide01" class="left"></label> <img
+										src="./images/magazine2.png" alt="이미지가 존재하지 않습니다."> <label
+										for="slide03" class=right></label>
+								</a></li>
+								<li><a> <label for="slide02" class="left"></label> <img
+										src="./images/magazine3.png" alt="이미지가 존재하지 않습니다."> <label
+										for="slide01" class=right></label>
+								</a> <span class="prev">&lang;</span> <span class="next">&rang;</span>
+
+
+
+								</li>
+							</ul>
+
+
+
+
+						</div>
+
+
+
+
+					</div>
+
+					<div class="contents3">
+						<div class>
+
+							<li><a href="https://www.facebook.com/GENUIN.classics"><img
+									src="./images/genuin.png" alt=""></a></li>
+						</div>
+						<div>
+
+							<li class="aomg"><a href="https://www.aomgofficial.com/"><img
+									src="./images/aomg.png" alt=""></a></li>
+						</div>
+
+
+					</div>
+
+
+				</div>
+				<footer id="page_footer">
+
+					<!-- <div class="div_footer">
+                    <div class="div_footer_log">
+                        NextIT
+                    </div>
+                    <div class="div_footer_addr">
+                        Copyright © Next IT Edu-Center 2016
+                        <br>Tel : 042-719-8850 Fax : 042-719-8851 e-Mail : nextitcenter@gmail.com
+                        <br>(34856) 넥스트 IT 교육센터
+                        <br>대전광역시 중구 계룡로 825 (용두동, 희영빌딩 2층)
+                    </div>
+                </div> -->
+
+				</footer>
+
+				<div id="modal_div1">
+					<div id="modal_div2" title="클릭하면 창이 닫힙니다.">
+						<!-- modal이 닫히는지 확인하려고  -->
+						<!-- <a href="#" class="modal_close_btn">닫기</a> -->
+
+						<!-- 6차-7 기존꺼 지우고 login.html에서 가져옴 (6차-8)-->
+						<form name="loginForm" action="">
+							<div class="int-area">
+								<input type="password" id="mem_pw" name="mem_pw" value=""
+									placeholder="PASSWORD" autocomplete="off" required>
+								<!-- <label for="mem_id">PASSWORD</label> -->
+							</div>
+							<div class="int-area">
+								<input type="password" id="mem_pw_check" name="mem_pw_check"
+									placeholder="RECONFIRM PASSWORD" autocomplete="off" required>
+								<!-- <label for="mem_pw_check">RECONFIRM PASSWORD</label> -->
+							</div>
+							<div class="btn-area">
+								<button type="button" id="btn_id" name="btn_id"
+									onclick="fn_change()">CHANGE</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+
+
+.intro_text h1{
+	margin-bottom : 100px;
+}
+.intro_bg{
+	width:60%;
+	height:300px;
+}

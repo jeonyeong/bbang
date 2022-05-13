@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mango</title>
+<link rel="icon" type="image/x-icon" href="./images/mango_log">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css"  href="./css/header.css">
+    <link rel="stylesheet" type="text/css"  href="./css/footer.css">
+    <link rel="stylesheet" type="text/css" href="./css/boardWrite.css">
+    <link rel="stylesheet" type="text/css" href="./css/search.css">
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+     <script>
+   $(function(){
+	   $(".top_nav").load("/Submit/header.do");
+	  
+   })
+     
+     
+     function addMusicList() {
+         let musicKeyWord = $('#songinfo').val()
+        $.ajax({
+            type: 'GET',
+            url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track='+musicKeyWord+'&api_key=bd104c114d96943442c79340a0106cdb&format=json',
+            success: function (response) {
+                alert("검색 성공!!")
+                 let musicList = response["results"]["trackmatches"]["track"];
+               
+                for (let i = 0; i < musicList.length; i++) {
+                //     let albumImg = musicList[i]["image"][0]["#text"]
+                     let albumTitle = musicList[i]["name"]
+                     let albumArtist = musicList[i]["artist"]
+                     console.log(albumTitle, albumArtist)
+                     
+                     
+                     
+                
+                }
+                
+               console.log("musicList.length:::" ,musicList.length);
+                console.log("musicList[0]::: ",musicList[0]);
+                console.log("musicList[0].name:::",musicList[0].name);
+                let index=1;
+                let insertHTML="";
+                
+                
+                musicList.forEach(element =>{
+                insertHTML += "<tr>";
+                insertHTML += "<td>" + index +"</td>";
+                insertHTML += "<td>" + element.name +"</td>";
+                insertHTML += "<td>" + element.artist +"</td>";
+                insertHTML += "</tr>";
+                index++;
+                });
+                $("#div_table tbody").html(insertHTML);
+            }
+        })
+    }
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+<span><img src="./images/mango3.png" alt=""></span>
+<form class="searchForm" action="methods">
+        <label for="songinfo"></label>
+        <input type="text" id="songinfo" class="whatToSearch" placeholder="검색">
+        <button type="button" onclick="addMusicList()">검색</button>
+    </form>
+            <div class="top_nav">
+        <!-- header 영역 -->    
+        
+   
+        
+              </div>
+              
+              
+              
+              
+        </div>
+        <!-- header e -->
+        
+<div class="contents">
+
+<div class= "search">
+<div id="div_table">
+<table>
+<colgroup>
+<col width="100">
+<col width="?">
+</colgroup>
+<thead>
+<tr>
+<th>No</th>
+<th>제목</th>
+<th>가수</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+
+
+    
+     <footer id="page_footer">
+    <!-- footer영역 -->
+</footer>
+    
+    
+</body>
+</html>

@@ -1,0 +1,26 @@
+.div_footer{
+    width: 80%;
+    height: 150px;
+    display: flex;
+    position: relative;
+    bottom: 100px;
+    
+    
+}
+.div_footer{
+    margin-top: 100px;
+}
+.div_footer > div {
+    padding-top:30px;
+}
+.div_footer > div:first-child{
+    flex: 4;
+}
+
+.div_footer > div:last-child{
+    flex: 6;
+}
+.div_footer > div:first-child{
+    text-align: center;
+    font-weight: bold;
+}

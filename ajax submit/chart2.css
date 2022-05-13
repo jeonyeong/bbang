@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+
+table {
+   position:absolute;
+   left:400px;
+   top :500px;
+      }
+      
+div#div_table{
+	height:100%;
+	margin-top:120px;
+	text-align: center;
+	
+
+}

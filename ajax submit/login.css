@@ -1,0 +1,103 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    background-color:aquamarine;
+    text-align: center;
+}
+.login_form{
+    position: relative;
+    top: 50%;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid black;
+}
+.login_form > h1 {
+    color:#fff;
+    font-size: 40px;
+}
+.login_form > h1{
+    padding-bottom: 30px;
+    
+}
+.int-area{
+    width: 400px;
+    background-color: lightsalmon;
+}
+.int-area input{
+    /* width: 100%; */
+    padding: 40px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px;
+    color: #fff;
+}
+.caption_ul > li{
+    list-style: none;
+    font-size: 20px;
+}
+
+.caption a{
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+.caption_ul > li{
+position: relative;
+right: 70px;
+bottom: 25px;
+}
+.btn-area{
+    position: relative;
+    left: 130px;
+    top: 25px;
+}
+.btn-area>button{
+    padding: 10px;
+}
+.btn-area :hover{
+    cursor: pointer;
+}
+
+.btn-area2{
+	position:relative;
+	top:40px;
+	left:130px;
+}
+.btn-area : hover{
+	cursor: pointer;
+}
+
+body{
+    background: url("../images/leaves-g5eeaca109_1920.jpg") no-repeat center;
+    background-size: cover;
+}
+body, .login_form, .int-area{
+    background-color: transparent;
+}
+
+body::before{
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.int-area input[name='mem_id']:focus + label{
+    top: 50px;
+    font-size: 15px;
+    color:darkorange;
+}
+.int-area input[name='mem_pw']:focus + label{
+    top: 120px;
+    font-size: 15px;
+    color: darkorange;
+}
+#btn_id:active{
+	color: gray;
+}
+.caption_ul a:active{
+    color: gray !important;
+}

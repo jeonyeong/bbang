@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango</title>
+    <link href="./images/mango_log" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css"  href="./css/header.css">
+    <link rel="stylesheet" type="text/css"  href="./css/footer.css">
+    <link rel="stylesheet" type="text/css"  href="./css/boardList.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+$(function(){
+    // jQuery 확인
+    // alert("345345");
+    $(".top_nav").load("/Submit/header.do");
+    $("#page_footer").load("/Submit/footer.do");
+    
+    //한개처리
+    /* let boardList = localStorage.getItem("boardList");
+    console.log("boardList", boardList);
+    if( boardList !== null && boardList !== undefined && boardList !== ""){
+    	let boardParse = JSON.parse(boardList);
+    	console.log("boardParse", boardParse);
+    	
+    	let outPut="";
+    	outPut += "<tr>";
+    	outPut += "<td>"+ "1" +"</td>";
+    	outPut += "<td>"+ boardParse.notice_title +"</td>";
+    	outPut += "<td>"+ boardParse.mem_id +"</td>";
+    	outPut += "<td>"+ boardParse.write_date +"</td>";
+    	outPut += "</tr>";
+    	$("#div_table > table > tbody").append(outPut);
+    } */
+    
+    boardList();
+ 
+});
+//여러개 처리
+/* function boardList(){
+	console.log("boardList");
+
+	let boardList = localStorage.getItem("boardList");
+    console.log("boardList", boardList);
+    if( boardList !== null && boardList !== undefined && boardList !== ""){
+    	let boardParse = JSON.parse(boardList);
+    	console.log("boardParse", boardParse);
+    	
+    	let total_cnt = boardParse.length;
+    	console.log("total_cnt", total_cnt);
+    	
+    	let outPut="";
+    	
+    	boardParse.reverse().forEach(function(element, index){
+    		outPut += "<tr>";
+        	outPut += "<td>"+ (total_cnt - index) +"</td>";
+        	outPut += "<td><a href='#' onclick=fn_title("+element.write_num+")>"+ element.notice_title +"</a></td>";
+        	outPut += "<td>"+ element.mem_id +"</td>";
+        	outPut += "<td>"+ element.write_date +"</td>";
+        	outPut += "</tr>";
+    	});
+    
+    	$("#div_table > table > tbody").append(outPut);
+    }
+} */
+
+//페이징 처리01 (2번페이지 페이징 처리)
+/* function boardList(){
+	console.log("boardList");
+	
+	let boardList = localStorage.getItem("boardList");
+	console.log("boardList", boardList);
+	
+	if( boardList !== null && boardList !== undefined && boardList !== ""){
+		let boardParse = JSON.parse(boardList);
+		console.log("boardParse", boardParse);
+		
+		let total_cnt = boardParse.length;
+		console.log("total_cnt", total_cnt);
+		
+		//하단에 표시할 페이지 개수 
+		let basic_paging_cnt =3;
+		//총 페이지 구하기 
+		let paging_cnt = total_cnt/10;
+		console.log("paging_cnt", paging_cnt);
+		
+		//2번 페이지 페이징 처리
+		let paging_num = 2;
+		//해당 페이지에 게시글 순번에서 낮은 수 구하기
+		let min_num = (paging_num *10) -9;
+		//해당 페이지에 게시글 순번에서 높은 수 구하기
+		let max_num = paging_num *10;
+		console.log("min_num::", min_num ," max_num :", max_num );
+		
+		
+		let paging_output ="";
+		for ( let i=0; i< paging_cnt; i++){
+			//0번이면 화살표
+			if(i==0){
+				paging_output += "<<";
+			}
+			//페이지번호넣기
+			paging_output += "<a>"+(i+1)+"</a>"
+			
+			//마지막이면 화살표 넣기
+			if(i== parseInt(paging_cnt)){
+				paging_output += ">>";
+			}
+		}
+		$(".div_paging_a").append(paging_output);
+		
+		
+		
+		
+		
+		let outPut="";
+		
+		boardParse.reverse().forEach(function(element, index){
+			if( min_num <= index+1 && index+1 <= max_num ){
+				outPut += "<tr>";
+		    	outPut += "<td>"+ (total_cnt - index) +"</td>";
+		    	outPut += "<td><a href='#' onclick=fn_title("+element.write_num+")>"+ element.notice_title +"</a></td>";
+		    	outPut += "<td>"+ element.mem_id +"</td>";
+		    	outPut += "<td>"+ element.write_date +"</td>";
+		    	outPut += "</tr>";
+			}
+		});
+	
+		$("#div_table > table > tbody").append(outPut);
+	}
+}  */
+//페이징 2차 처리 ( 페이징 처리한거 클릭하면 해당 페이지 보이게 처리하기)
+/* function boardList(cur_num){
+	console.log("boardList");
+	console.log("cur_num", cur_num);
+	
+	$("#div_table > table > tbody > tr").remove();
+	$(".div_paging_a").children().remove();
+	$(".div_paging_a").text("");
+	
+	let boardList = localStorage.getItem("boardList");
+	console.log("boardList", boardList);
+	
+	if( boardList !== null && boardList !== undefined && boardList !== ""){
+		let boardParse = JSON.parse(boardList);
+		console.log("boardParse", boardParse);
+		
+		let total_cnt = boardParse.length;
+		console.log("total_cnt", total_cnt);
+		
+		let basic_paging_cnt =3;
+		let paging_cnt = total_cnt/10;
+		console.log("paging_cnt", paging_cnt);
+		
+		//let paging_num = 2;
+		let paging_num;
+		if( cur_num != null && cur_num !==undefined && cur_num !=0 ){
+			paging_num = cur_num;
+		}else{
+			paging_num = 1;
+		}
+		
+		let min_num = (paging_num *10) -9;
+		let max_num = paging_num *10;
+		console.log("min_num::", min_num ," max_num :", max_num );
+		
+		let paging_output ="";
+		for ( let i=0; i< paging_cnt; i++){
+			if(i==0){
+				paging_output += "&lt;&lt;";
+			}
+			paging_output += "<a href='#' onclick='boardList("+ (i+1) +")'>"+(i+1)+"</a>"
+			if(i== parseInt(paging_cnt)){
+				paging_output += "&gt;&gt;";
+			}
+		}
+		$(".div_paging_a").append(paging_output);
+		
+		let outPut="";
+		boardParse.reverse().forEach(function(element, index){
+			if( min_num <= index+1 && index+1 <= max_num ){
+				outPut += "<tr>";
+		    	outPut += "<td>"+ (total_cnt - index) +"</td>";
+		    	outPut += "<td><a href='#' onclick=fn_title("+element.write_num+")>"+ element.notice_title +"</a></td>";
+		    	outPut += "<td>"+ element.mem_id +"</td>";
+		    	outPut += "<td>"+ element.write_date +"</td>";
+		    	outPut += "</tr>";
+			}
+		});
+		$("#div_table > table > tbody").append(outPut);
+	}
+}  */
+
+//페이징처리03 ( 좌우 화살표 처리 )
+function boardList(cur_num){
+	console.log("boardList");
+	console.log("cur_num", cur_num);
+	
+	$("#div_table > table > tbody > tr").remove();
+	$(".div_paging_a").children().remove();
+	$(".div_paging_a").text("");
+	
+	let boardList = localStorage.getItem("boardList");
+	console.log("boardList", boardList);
+	
+	if( boardList !== null && boardList !== undefined && boardList !== ""){
+		let boardParse = JSON.parse(boardList);
+		console.log("boardParse", boardParse);
+		
+		let total_cnt = boardParse.length;
+		console.log("total_cnt", total_cnt);
+		
+		let basic_paging_cnt =3;
+		let paging_cnt = total_cnt/10;
+		console.log("paging_cnt", paging_cnt);
+		
+		let paging_num;
+		if( cur_num != null && cur_num !==undefined && cur_num !=0 ){
+			paging_num = cur_num;
+		}else{
+			paging_num = 1;
+		}
+		
+		let min_num = (paging_num *10) -9;
+		let max_num = paging_num *10;
+		console.log("min_num::", min_num ," max_num :", max_num );
+		
+		let paging_output ="";
+		for ( let i=0; i< paging_cnt; i++){
+		//왼쪽 화살
+			if(i==0){
+				paging_output +="<a href='#' class='button_side' onclick='boardList("+(paging_num -1)+")'>" 
+				+ "&lt;&lt;" +"</a>";
+			}
+		//숫자 부"	
+			//paging_output += "<a href='#' onclick='boardList("+ (i+1) +")'>"+(i+1)+"</a>"
+			if( paging_num ==1){
+				if (i <3){
+					paging_output += "<a href='#' onclick='boardList("+ (i+1) +")'>"
+					+(i+1)+"</a>"
+				}
+			//클릭한 숫자가 1보다 크고 마지막 페이지 숫자 보다 작은 경우
+			}else if(paging_num > 1 && paging_num < parseInt(paging_cnt) +1){
+				if( paging_num -2 == i || paging_num -1 == i || paging_num == i ){
+					paging_output += "<a href='#' onclick='boardList("+ (i+1) +")'>"
+					+(i+1)+"</a>"
+				}
+			//클릭한 숫자가 마지막 페이지 인 경우 
+			}else if(paging_num == parseInt(paging_cnt)+1 || paging_num == paging_cnt){
+				if( paging_num-3 == i || paging_num-2 == i || paging_num-1 == i){
+					paging_output += "<a href='#' onclick='boardList("+ (i+1) +")'>"
+					+(i+1)+"</a>"
+				}
+				
+			}
+			
+			
+			
+		// 오른쪽 화살표 
+			if(i== parseInt(paging_cnt)){
+				//마지막 페이지인경우이면서 클릭한 페이지 넘버도 마지막일때 
+				if(paging_num == parseInt(paging_cnt)+1){
+					paging_output +="<a href='#' class='button_side' onclick='boardList("+(paging_num)+")'>" 
+						+ "&gt;&gt;" +"</a>";
+				}else{
+				//현재 클릭한 페이지 넘버가 마지막이 아닌 경우 +1을 한다.
+					paging_output +="<a href='#' class='button_side' onclick='boardList("+(paging_num+1)+")'>" 
+						+ "&gt;&gt;" +"</a>";
+				}
+			}
+		}
+		$(".div_paging_a").append(paging_output);
+		
+		
+		if( paging_cnt > basic_paging_cnt){
+			$(".button_side").show();
+		}else{
+			$(".button_side").hide();
+		}
+		
+		
+		let outPut="";
+		boardParse.reverse().forEach(function(element, index){
+			if( min_num <= index+1 && index+1 <= max_num ){
+				outPut += "<tr>";
+		    	outPut += "<td>"+ (total_cnt - index) +"</td>";
+		    	outPut += "<td><a href='#' onclick=fn_title("+element.write_num+")>"+ element.notice_title +"</a></td>";
+		    	outPut += "<td>"+ element.mem_id +"</td>";
+		    	outPut += "<td>"+ element.write_date +"</td>";
+		    	outPut += "</tr>";
+			}
+		});
+		$("#div_table > table > tbody").append(outPut);
+	}
+} 
+
+
+function fn_title(temp_write_num){
+	console.log("fn_title");
+	console.log("temp_write_num", temp_write_num);
+	sessionStorage.setItem("temp_write_num", temp_write_num);
+	location.href="/Submit/board_write.do";
+}
+
+ 
+
+function board_write(){
+	console.log("board_write");
+	location.href="/Submit/board_write.do";
+
+ 
+}
+function fn_write(){
+	location.href="/Submit/board_write.do";
+}
+
+
+</script>
+
+
+
+</head>
+<body>
+    <div id="wrap">
+        <div class="header">
+            <div class="top_nav">
+                <!-- header 영역 -->
+            </div>
+        </div>
+        <!-- header e -->
+
+        <div class="intro_bg">
+            
+        </div>
+
+        <div class="contents">
+            <!-- 사용할 영역잡기 -->
+            <div class="content01">
+                <div class="content01_h1">
+                    <h1>공지사항</h1>
+                </div>
+                <!-- 리스트 -->
+                <div id="div_table">
+                    <table>
+                        <colgroup>
+                            <col width="40">
+                            <col >
+                            <col width="180">
+                            <col width="300">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>시간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr>
+                                <td>10</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="#"></a> test_01</td>
+                                <td>specialyw</td>
+                                <td>2021.09.13</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="div_paging">
+                    <div class="div_paging_a">
+                        <a href="">&lt;&lt;</a>
+                        <a href="">1</a>
+                        <a href="">2</a>
+                        <a href="">3</a>
+                        <a href="">&gt;&gt;</a>
+                    </div>
+                    <div class="div_board_write">
+                        <input type="button" onclick="javascript:fn_write()" value="글쓰기">
+                    </div>
+                </div>
+
+            </div>
+             <!-- footer -->
+         <footer id="page_footer">
+            <!-- footer영역 -->
+        </footer>
+        </div>
+
+</body>
+</html>

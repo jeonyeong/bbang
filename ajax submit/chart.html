@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mango</title>
+ <link rel="icon" type="image/x-icon" href="./images/mango_log">
+  <link rel="stylesheet" type="text/css"  href="./css/header.css">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+
+window.onload = function(){
+	
+	$(".top_nav").load("/Submit/header.do");
+}
+
+
+
+</script>
+
+
+<style>
+    body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+   background: white; 
+}
+
+.chart{
+  width: 600px;
+  height: 300px;
+  display: block;
+}
+
+.numbers{
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 100%;
+  display: inline-block;
+  /* float: left; */
+}
+
+.numbers li{
+  list-style: none;
+  height: 150px;
+  position: relative;
+  bottom: 145px;
+}
+
+.numbers span{
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+.bars{
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgb(165, 197, 233);
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 500px;
+  height: 300px;
+  box-shadow: 0 0 10px 0 #555;
+  border-radius: 5px;
+}
+
+.bars li{
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  position: relative;
+}
+
+.bars span{
+  width: 100%;
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+}
+
+.bars .bar{
+  display: block;
+  background: white;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgba(23, 192, 235, 0.5);
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+.bars .bar:hover{
+  background: #55EFC4;
+  box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+  cursor: pointer;
+}
+
+.bars .bar:before{
+  color: black;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
+}
+h1{
+text-align:center;
+margin-bottom:50px;
+}      
+.header{
+position:absolute;
+left:300px
+}
+</style>  
+
+
+
+
+</head>
+
+
+
+
+<body>
+<div id="wrap">
+<div class="header">
+            <div class="top_nav">
+                <!-- header 영역 -->
+            </div>
+        </div>
+
+<div class="chart">
+<h1>선호도 퍼센티지</h1>
+      <ul class="numbers">
+        <li><span>100%</span></li>
+        <li><span>50%</span></li>
+        <li><span>0%</span></li>
+      </ul>
+      <ul class="bars">
+        <li><div class="bar" data-percentage="50"></div><span>봄 여름 가을 겨울</span></li>
+        <li><div class="bar" data-percentage="30"></div><span>TOMBOY</span></li>
+        <li><div class="bar" data-percentage="60"></div><span>love dive</span></li>
+        <li><div class="bar" data-percentage="100"></div><span>that that</span></li>
+        <li><div class="bar" data-percentage="80"></div><span>사랑인가 봐</span></li>
+      </ul>
+    </div>
+    <!--chart end-->
+
+    <script type="text/javascript">
+    $(function(){
+      //$('.bars li .bar').each(function(key, bar){
+      $('.bars li .bar').each(function(){
+        var percentage = $(this).data('percentage');
+        $(this).animate({
+          'height' : percentage + '%'
+        },1000);
+      });
+    });
+
+    </script>
+
+
+</body>
+</html>
